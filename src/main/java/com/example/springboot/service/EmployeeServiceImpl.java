@@ -39,7 +39,7 @@ public class EmployeeServiceImpl implements IEmployeeService{
 	
 	@SuppressWarnings("unchecked")
 	public List<EmployeeDto> allEmployees(){
-		logger.info(" Entered into allEmployees  Method : EmployeeServiceImpl");
+		logger.info(" Entered into allEmployees  Method : EmployeeServiceImpl testing");
 		List<Employee> emp =  employeeRepository.findAll();
 		List<EmployeeDto> empDto =  (List<EmployeeDto>) mapper.mapAllListToDto(emp,EmployeeDto.class); 
 		return empDto;
