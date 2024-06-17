@@ -39,7 +39,7 @@ public class EmployeeServiceImpl implements IEmployeeService{
 	
 	@SuppressWarnings("unchecked")
 	public List<EmployeeDto> allEmployees(){
-		logger.info(" Entered into allEmployees  Method : EmployeeServiceImpl testing");
+		logger.info(" Entered into allEmployees  Method : EmployeeServiceImpl");
 		List<Employee> emp =  employeeRepository.findAll();
 		List<EmployeeDto> empDto =  (List<EmployeeDto>) mapper.mapAllListToDto(emp,EmployeeDto.class); 
 		return empDto;
@@ -56,7 +56,7 @@ public class EmployeeServiceImpl implements IEmployeeService{
 	
 	public EmployeeDto createEmployee(EmployeeDto employeeDto) throws ResourceNotFoundException {
 		logger.info(" Entered into createEmployee  Method : EmployeeServiceImpl");
-		if(employeeDto != null && employeeDto.getId() >0) {
+		if(employeeDto != null && employeeDto.getId() >1) {
 			Employee employee = employeeRepository.findById(employeeDto.getId())
 					.orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + employeeDto.getId()));
 			EmployeeDto requestDto = mapper.convertEmployeeEntityToDto(employee);
@@ -81,7 +81,7 @@ public class EmployeeServiceImpl implements IEmployeeService{
 		logger.info(" Entered into deleteEmployee Method in : EmployeeServiceImpl");
 		Employee employee = employeeRepository.findById(employeeId)
 				.orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + employeeId));
-		if(employee != null && employee.getId() >0) {
+		if(employee != null && employee.getId() >1) {
 			employeeRepository.deleteById(employee.getId());
 			logger.info(" Deleted the Employee in deleteEmployee Method: EmployeeServiceImpl");
 		}
