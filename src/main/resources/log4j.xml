@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+    <Properties>
+        <Property name="LOG_PATTERN">
+            %d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${hostName} --- [%15.15t] %-40.40c{1.} : %m%n%ex
+        </Property>
+    </Properties>
+    <Appenders>
+        <Console name="ConsoleAppender" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+    </Appenders>
+	    <appender name="graylog" class="org.graylog2.log.GelfAppender">
+	    <param name="graylogHost" value="udp:127.0.0.1"/>
+	    <param name="originHost" value="localhost"/>
+	    <param name="graylogPort" value="5555"/>
+	    <param name="extractStacktrace" value="true"/>
+	    <param name="addExtendedInformation" value="true"/>
+	    <param name="facility" value="log4j"/>
+	    <param name="Threshold" value="INFO"/>
+	    <param name="additionalFields" value="{'environment': 'DEV', 'application': 'Application'}"/>
+	</appender>
+    <Loggers>
+        <Logger name="com.example.log4j2demo" level="info" additivity="false">
+            <AppenderRef ref="ConsoleAppender" />
+        </Logger>
+
+        <Root level="info">
+            <AppenderRef ref="ConsoleAppender" />
+        </Root>
+    </Loggers>
+</Configuration>
