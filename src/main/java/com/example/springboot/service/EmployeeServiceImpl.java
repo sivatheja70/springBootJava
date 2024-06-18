@@ -39,7 +39,7 @@ public class EmployeeServiceImpl implements IEmployeeService{
 	
 	@SuppressWarnings("unchecked")
 	public List<EmployeeDto> allEmployees(){
-		logger.info(" Entered into allEmployees  Method : EmployeeServiceImpl");
+		logger.info(" Entered into allEmployees  Method : EmployeeServiceImpl test");
 		List<Employee> emp =  employeeRepository.findAll();
 		List<EmployeeDto> empDto =  (List<EmployeeDto>) mapper.mapAllListToDto(emp,EmployeeDto.class); 
 		return empDto;
@@ -48,7 +48,7 @@ public class EmployeeServiceImpl implements IEmployeeService{
 	public EmployeeDto employeeById(Long employeeId) throws ResourceNotFoundException {
 		Employee employee = employeeRepository.findById(employeeId)
 				.orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + employeeId));
-		if(employee != null && employee.getId() >0) {
+		if(employee != null && employee.getId() >1) {
 			return mapper.convertEmployeeEntityToDto(employee);
 		}
 		return null;
